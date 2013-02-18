@@ -24,9 +24,9 @@
 	function startPaint(event) {
 		//Set up a running list of points
 		pointers[event.pointerId] = [{x: event.offsetX, y: event.offsetY}, 
-									{x: event.offsetX, y: event.offsetY}, 
-									{x: event.offsetX, y: event.offsetY}, 
-									{x: event.offsetX, y: event.offsetY}];
+                                     {x: event.offsetX, y: event.offsetY}, 
+                                     {x: event.offsetX, y: event.offsetY}, 
+                                     {x: event.offsetX, y: event.offsetY}];
 	}
 	
 	function endPaint(event) {
@@ -42,8 +42,8 @@
 			context.beginPath();
 			context.moveTo(points[0].x, points[0].y);
 			context.bezierCurveTo(	points[1].x, points[1].y, 
-									points[2].x, points[2].y, 
-									points[3].x, points[3].y);		
+                                    points[2].x, points[2].y, 
+                                    points[3].x, points[3].y);		
 			//Paint path
 			context.lineWidth = (event.width + event.height)*3 || event.pressure*10 || 4; //Use touch geometry, pen pressure, or a default width
 			console.log("w:" + event.width + " h:" + event.height + " p:" + event.pressure);
