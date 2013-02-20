@@ -1,12 +1,13 @@
 <!doctype html>
 <html>
 <head>
-	<title>Paint!</title>
+	<title>PointerPaint!</title>
 </head>
 <body>
 	<style>
 		canvas {
 			-ms-touch-action: none;
+			touch-action: none;
 		}
 	</style>
 	<canvas id=canvas width=800 height=600 style="border: 2px solid #333"></canvas>
@@ -16,10 +17,17 @@
 	var pointers = [];
 	var colors = ["red", "blue", "green", "yellow", "black", "orange"];
 
-	canvas.addEventListener("MSPointerDown", startPaint);
-	canvas.addEventListener("MSPointerMove", paint);
-	canvas.addEventListener("MSPointerUp", endPaint);
-	canvas.addEventListener("MSPointerCancel", endPaint);
+	if(navigator.pointerEnabled) {
+		canvas.addEventListener("pointerdown", startPaint);
+		canvas.addEventListener("pointermove", paint);
+		canvas.addEventListener("pointerup", endPaint);
+		canvas.addEventListener("pointercancel", endPaint);	
+	}else if(navigator.msPointerEnabled) {
+		canvas.addEventListener("MSPointerDown", startPaint);
+		canvas.addEventListener("MSPointerMove", paint);
+		canvas.addEventListener("MSPointerUp", endPaint);
+		canvas.addEventListener("MSPointerCancel", endPaint);
+	}
 
 	function startPaint(event) {
 		//Set up a running list of points
